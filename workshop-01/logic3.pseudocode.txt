@@ -1,0 +1,30 @@
+START
+  INIT numberOfBeveragesToBeBought
+
+  // get the number of  baskets made by the two players
+  GET playerOneBaskets
+  GET playerTwoBaskets
+
+  // get ties ( if any )
+  GET numberOfTies
+
+  // calculate the number of beverages ( coffee / tea )
+  // to be bought by the loser for the winner
+
+  IF playerOneBaskets GREATER THAN playerTwoBaskets
+    SET numberOfBeveragesToBeBought = playerOneBaskets
+  ELSE
+    SET numberOfBeveragesToBeBought = playerTwoBaskets
+
+  // check for ties
+  IF numberOfTies GREATER THAN 0
+    // iterate over each tie
+    FOR EACH tie IN numberOfTies
+      // reduce the number of beverages ( coffee / tea ) by 1/2
+      SET numberOfBeveragesToBeBought = numberOfBeveragesToBeBought / 2
+
+  // round the winning amount using an arbitary function ( ROUND in this case )
+  SET numberOfBeveragesToBeBought = ROUND numberOfBeveragesToBeBought
+
+  RETURN numberOfBeveragesToBeBought
+END
