@@ -1,0 +1,58 @@
+START
+	
+	// get the amount of snow and ice
+	GET "mixed"
+	// temperatur
+	GET "temperature"
+
+	// values to be calculated
+	DECLARE numberOfPlowTrucks
+	DECLARE numberOfSandTrucks_Light
+	DECLARE numberOfSandTrucks_Normal
+	DECLARE numberOfSandTrucks_Heavy
+	DECLARE numberOfSaltTrucks_Light
+	DECLARE numberOfSaltTrucks_Normal
+	DECLARE numberOfSaltTrucks_Heavy
+
+	IF mixed >= 45.1cm
+		// declare state emergency
+	ELSE IF mixed >= 15.1 AND mixed <= 45.0
+		IF temperature <= -10
+			SET numberOfPlowTrucks = 2
+			SET numberOfSandTrucks_Heavy = 1
+		ELSE IF temperature > -10 AND temperature < -5
+			SET numberOfPlowTrucks = 2
+			SET numberOfSaltTrucks_Heavy = 1
+		ELSE IF temperature > -5
+			SET numberOfPlowTrucks = 2
+			SET numberOfSaltTrucks_Light = 1
+	ELSE IF mixed >= 5.1 AND mixed <= 15.0
+		IF temperature <= -10
+			SET numberOfPlowTrucks = 1
+			SET numberOfSandTrucks_Heavy = 1
+		ELSE IF temperature > -10 AND temperature < -5
+			SET numberOfPlowTrucks = 1
+			SET numberOfSaltTrucks_Heavy = 1
+		ELSE IF temperature > -5
+			SET numberOfPlowTrucks = 1
+			SET numberOfSaltTrucks_Normal = 1
+	ELSE IF mixed >= 2.6 AND mixed <= 5.0
+		IF temperature <= -10
+			SET numberOfPlowTrucks = 1
+			SET numberOfSandTrucks_Light = 1
+		ELSE IF temperature > -10 AND temperature < -5
+			SET numberOfPlowTrucks = 1
+			SET numberOfSaltTrucks_Heavy = 1
+		ELSE IF temperature > -5
+			SET numberOfPlowTrucks = 1
+
+	RETURN numberOfPlowTrucks,
+	       numberOfSandTrucks_Light,
+	       numberOfSandTrucks_Normal,
+	       numberOfSandTrucks_Heavy,
+	       numberOfSaltTrucks_Light,
+	       numberOfSaltTrucks_Normal,
+	   AND numberOfSaltTrucks_Heavy
+
+END
+
