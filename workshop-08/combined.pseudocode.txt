@@ -1,0 +1,61 @@
+SUBPROCESS washTypePrompt
+START
+
+  DECLARE washType, cost
+  SET washType = PROMPT("Please select a wash type")
+
+  IF washType == "Clean"
+    cost = 6
+  ELSE IF washType == "Sparkling"
+    cost = 11
+  ELSE IF washType == "The Works"
+    cost = 20
+
+  RETURN cost, washType
+
+END
+
+MAIN PROCESS
+START
+
+  DECLARE isVIP defaultTier, selectedTier, numberOfCompletedCarWashes
+
+  SET isVIP = get data from chip
+
+  IF NOT isVIP
+    SET cost, washType = washTypePrompt()
+
+    PROMPT("Final amount: $" + cost)
+    PROMPT("Please complete the payment and proceed to the washing area.")
+
+    GENERATE RECEIPT
+
+  ELSE
+    SET defaultTier = PROMPT("Would you like to use the tier you subscribed for?")
+    SET numberOfCompletedCarWashes = get data from chip
+
+    IF defaultTier
+      // get user's default tier from the chip
+      selectedTier = get data from chip
+
+      IF numberOfCompletedCarWashes > 2
+        IF selectedTier == "Clean"
+          cost = 6
+        ELSE IF selectedTier == "Sparkling"
+          cost = 11
+        ELSE IF selectedTier == "The Works"
+          cost = 20
+      ELSE
+        numberOfCompletedCarWashes += 1
+        cost = 0
+    ELSE
+      SET cost, washType = washTypePrompt()
+
+      PROMPT("Final amount: $" + cost)
+      PROMPT("Please complete the payment and proceed to the washing area.")
+
+      numberOfCompletedCarWashes += 1
+
+      GENERATE RECEIPT
+
+END

@@ -1,0 +1,23 @@
+START
+
+  DECLARE defaultTier, selectedTier, numberOfCompletedCarWashes, cost
+
+  SET defaultTier = PROMPT("Would you like to use the tier you subscribed for?")
+  SET numberOfCompletedCarWashes = get data from chip
+
+  IF defaultTier
+    // get user's default tier from the chip
+    selectedTier = get data from chip
+
+  IF numberOfCompletedCarWashes > 2
+    IF selectedTier == "Clean"
+      cost = 6
+    ELSE IF selectedTier == "Sparkling"
+      cost = 11
+    ELSE IF selectedTier == "The Works"
+      cost = 20
+  ELSE
+    numberOfCompletedCarWashes += 1
+    cost = 0
+
+END
