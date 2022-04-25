@@ -1,0 +1,19 @@
+START
+
+  DECLARE 
+    numberOfBasePaintCans, 
+    numberOfFinishingPaintCans,
+    subTotal,
+    tax,
+    total
+
+  GET number of cans of base paint used and assign it to numberOfBasePaintCans
+  GET number of cans of finishing paint used and assign it to numberOfFinishingPaintCans
+
+  subtotal = (numberOfBasePaintCans * 40.75) + (numberOfFinishingPaintCans * 47.75)
+  tax      = subtotal * (13 / 100)
+  total    = subtotal + tax
+
+  RETURN subtotal, tax, total
+
+END

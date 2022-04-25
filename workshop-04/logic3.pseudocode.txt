@@ -1,0 +1,17 @@
+START
+  DECLARE score_playerOne, score_playerTwo,
+          move_playerOne,  move_playerTwo,    // moves by the two players ( rock, paper, scissors )
+  GET playerOne and playerTwo scores and assign to score_playerOne and score_playerTwo respectively
+
+  GET playerOne and playerTwo moves and assign to move_playerOne and move_playerTwo respectively
+
+  IF(move_playerOne == move_playerTwo)
+    // tie
+    // check existing scores
+    IF(score_playerOne == score_playerTwo)
+      repeat the round
+    ELSE IF(score_playerOne < score_playerTwo)
+      playerTwo wins
+    ELSE IF(score_playerOne > score_playerTwo)
+      playerOne wins
+END
